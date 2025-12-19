@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamara Jahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --rose-bg: #fff0f3;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--rose-bg);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        @keyframes luxury-float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes logo-glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(244, 63, 94, 0.4)); }
+            50% { filter: drop-shadow(0 0 15px rgba(244, 63, 94, 0.8)); }
+        }
+
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            animation: luxury-float linear infinite;
+        }
+
+        .crystal-header { 
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(20px) saturate(180%); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '❤';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .nav-link:hover::after { opacity: 1; top: -14px; }
+        
+        .glass-premium { 
+            background: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.8); 
+        }
+
+        #site-content { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- --- LOCK SCREEN --- -->
+    <div id="lock-screen" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#fff0f3] overflow-hidden p-4">
+        <div id="lock-hearts-container" class="absolute inset-0 pointer-events-none"></div>
+        <div class="relative z-10 w-full max-w-md">
+            <div class="bg-white/60 backdrop-blur-xl border border-white/80 p-6 md:p-10 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl text-center">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-rose-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                    <i data-lucide="lock" class="text-white w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-gray-800 mb-2">Private Access</h2>
+                <p class="text-gray-400 text-xs md:text-sm font-serif italic mb-8">Sirf hamare liye...</p>
+                
+                <form id="main-unlock-form">
+                    <input 
+                        type="password" 
+                        id="main-password-input"
+                        placeholder="Enter Entry Code..."
+                        class="w-full px-6 py-4 rounded-2xl border-2 border-rose-50 focus:border-rose-400 outline-none text-center mb-4 bg-white font-serif text-lg md:text-xl tracking-widest"
+                        required
+                    >
+                    <p id="main-error" class="text-rose-500 text-xs mb-4 font-bold hidden">Galat Code! Access Denied.</p>
+                    <button type="submit" class="w-full bg-rose-500 text-white font-black py-4 rounded-2xl shadow-lg hover:bg-rose-600 transition-all uppercase text-[10px] tracking-widest flex items-center justify-center gap-2">
+                        Open Our World <i data-lucide="unlock" class="w-4 h-4"></i>
+                    </button>
+                </form>
+                <p class="mt-8 text-[8px] text-gray-300 uppercase tracking-widest">Eternal Love Connection</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- MAIN CONTENT --- -->
+    <div id="site-content">
+        <!-- Floating Hearts Background -->
+        <div id="bg-hearts-container"></div>
+
+        <!-- HEADER -->
+        <header id="main-header" class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 h-20 md:h-24 bg-transparent">
+            <div class="container mx-auto h-full px-4 md:px-10 flex items-center justify-between">
+                <div class="flex items-center gap-1 md:gap-2 group cursor-pointer" style="animation: logo-glow 3s infinite">
+                    <div class="relative">
+                        <i data-lucide="heart" class="text-rose-500 fill-rose-500 group-hover:scale-110 transition-transform duration-500 w-7 h-7"></i>
+                        <i data-lucide="sparkles" class="absolute -top-1 -right-1 text-yellow-400 animate-pulse w-3 h-3"></i>
+                    </div>
+                    <span class="logo-text font-serif font-black bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text text-transparent text-base md:text-3xl transition-all duration-500">
+                        Hamara Jahan
+                    </span>
+                </div>
+
+                <nav class="flex items-center gap-2 md:gap-8 bg-white/40 md:bg-transparent p-1.5 px-3 md:p-0 rounded-full backdrop-blur-md md:backdrop-blur-0">
+                    <a href="#kahani" class="nav-link uppercase text-gray-600 hover:text-rose-500 text-[8px] md:text-[11px]">Kahani</a>
+                    <a href="#mulakatein" class="nav-link uppercase text-gray-600 hover:text-rose-500 text-[8px] md:text-[11px]">Mulakatein</a>
+                    <a href="#yaadein" class="nav-link uppercase text-gray-600 hover:text-rose-500 text-[8px] md:text-[11px]">Yaadein</a>
+                    <a href="#tarif" class="nav-link uppercase text-gray-600 hover:text-rose-500 text-[8px] md:text-[11px]">Tarif</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section id="kahani" class="relative min-h-screen flex items-center justify-center pt-24 md:pt-32 text-center px-6">
+            <div class="z-10 w-full max-w-5xl">
+                <div class="inline-flex items-center gap-2 bg-white/90 px-4 py-1.5 rounded-full text-rose-500 text-[8px] md:text-[9px] font-black mb-6 md:mb-8 shadow-md border border-rose-50 uppercase tracking-widest animate-bounce">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i> our beautiful journey
+                </div>
+                <h1 class="text-4xl md:text-8xl lg:text-9xl font-serif text-gray-800 mb-6 md:mb-8 leading-[1.1] md:leading-tight tracking-tighter">
+                    Tum Meri <br><span class="text-rose-500 italic drop-shadow-2xl">Jaan</span> Ho
+                </h1>
+
+                <div class="mb-6 px-4">
+                    <p class="text-rose-400 font-serif italic text-base md:text-xl">"Jab se tum mile ho, har lamha khaas ho gaya..."</p>
+                </div>
+                
+                <div class="glass-premium p-6 md:p-12 rounded-[2rem] md:rounded-[4rem] shadow-xl inline-flex flex-col items-center mb-8 w-full max-w-3xl border-white/40">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 w-full">
+                        <div class="flex flex-col"><span id="days" class="text-3xl md:text-6xl font-serif font-bold text-gray-800">0</span><span class="text-[8px] md:text-[9px] uppercase font-black text-rose-300 tracking-widest">Din</span></div>
+                        <div class="flex flex-col"><span id="hours" class="text-3xl md:text-6xl font-serif font-bold text-gray-800">0</span><span class="text-[8px] md:text-[9px] uppercase font-black text-rose-300 tracking-widest">Ghante</span></div>
+                        <div class="flex flex-col"><span id="minutes" class="text-3xl md:text-6xl font-serif font-bold text-gray-800">0</span><span class="text-[8px] md:text-[9px] uppercase font-black text-rose-300 tracking-widest">Min</span></div>
+                        <div class="flex flex-col"><span id="seconds" class="text-3xl md:text-6xl font-serif font-bold text-rose-500 animate-pulse">0</span><span class="text-[8px] md:text-[9px] uppercase font-black text-rose-300 tracking-widest">Sec</span></div>
+                    </div>
+                </div>
+
+                <div class="space-y-4 px-4">
+                    <p class="text-[8px] md:text-xs font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-gray-400">Humein saath Jude hue</p>
+                    <div class="flex justify-center items-center gap-2 md:gap-3 bg-white/50 backdrop-blur px-5 md:px-6 py-2 rounded-full w-max mx-auto border border-rose-100 shadow-sm">
+                        <i data-lucide="heart" class="text-rose-500 fill-rose-500 w-3 h-3"></i>
+                        <span class="font-serif font-bold text-gray-700 text-sm md:text-base">19 November 2024</span>
+                        <i data-lucide="heart" class="text-rose-500 fill-rose-500 w-3 h-3"></i>
+                    </div>
+                    <p class="text-gray-500 font-serif italic max-w-lg mx-auto leading-relaxed text-sm md:text-base">
+                        Tumhare saath bitaya gaya har ek second mere liye ek tohfa hai. Shukriya meri zindagi mein aane ke liye.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MULAKATEIN -->
+        <section id="mulakatein" class="py-16 md:py-24 bg-white/40 backdrop-blur-sm">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-7xl font-serif font-bold text-gray-800 mb-12 md:mb-20">Khaas Mulakatein</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto text-left" id="memories-container">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- YAADEIN / SECRET VAULT -->
+        <section id="yaadein" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 md:px-6 text-center">
+                <div class="mb-12 md:mb-16">
+                    <div id="vault-icon" class="inline-flex p-4 md:p-6 rounded-full bg-rose-50 text-rose-500 mb-6 shadow-lg">
+                        <i data-lucide="lock" class="w-10 h-10 md:w-12 md:h-12"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-6xl font-serif font-bold text-gray-800 mb-4">Secret Box</h2>
+                    <p class="text-gray-400 text-base md:text-lg font-serif italic">Hamari yaadon ka pitara...</p>
+                </div>
+
+                <div id="vault-form-container" class="max-w-md mx-auto">
+                    <form id="secret-unlock-form" class="glass-premium p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] shadow-xl">
+                        <p class="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-rose-400 mb-8">Internal Encryption</p>
+                        <input 
+                            type="password" 
+                            id="secret-password-input"
+                            placeholder="Secret Code..."
+                            class="w-full px-6 py-4 rounded-2xl border-2 border-rose-50 focus:border-rose-400 outline-none text-center mb-6 bg-white font-serif text-lg md:text-xl tracking-widest"
+                            required
+                        >
+                        <p id="secret-error" class="text-rose-500 text-xs mb-4 font-bold hidden">Galat Code! Dubara koshish karein.</p>
+                        <button type="submit" class="w-full bg-rose-500 text-white font-black py-4 rounded-2xl shadow-lg hover:bg-rose-600 transition-all uppercase text-[10px] tracking-widest">Unlock Secret</button>
+                    </form>
+                </div>
+
+                <div id="vault-content" class="hidden animate-in fade-in duration-700">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-16 px-2" id="photo-grid">
+                        <!-- Photos via JS -->
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6" id="video-grid">
+                        <!-- Video Cards via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TARIF -->
+        <section id="tarif" class="py-16 md:py-24 bg-[#fffafb]">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-6xl font-serif font-bold text-gray-800 mb-12 md:mb-20 tracking-tighter">Tum Kyun Khaas Ho?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto text-left" id="compliments-container">
+                    <!-- Compliments via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SHAYARI -->
+        <section class="py-24 md:py-40 bg-[#0c0607] text-white text-center relative">
+            <div class="container mx-auto px-6 z-10 relative">
+                <i data-lucide="quote" class="mx-auto mb-6 md:mb-10 text-rose-500 opacity-30 w-12 h-12 md:w-16 md:h-16"></i>
+                <h2 class="text-lg md:text-5xl font-serif italic mb-10 md:mb-12 leading-loose md:leading-relaxed max-w-4xl mx-auto px-2 font-light">
+                    "Zindagi mein har pal bas tera saath chahiye, <br>
+                    Mere hathon mein hamesha tera hi haath chahiye, <br>
+                    Tumhare milne se mil gayi poori duniya mujhe, <br>
+                    Ab khuda se na koi aur saugat chahiye."
+                </h2>
+                <i data-lucide="heart" class="mx-auto text-rose-500 fill-rose-500 animate-pulse w-5 h-5"></i>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="relative bg-white pt-24 md:pt-32 pb-12 md:pb-16 border-t border-rose-50 px-6 overflow-hidden text-center md:text-left">
+            <div class="absolute top-0 left-0 w-full leading-[0] transform rotate-180">
+                <svg class="relative block w-full h-[40px] md:h-[80px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#0c0607"></path>
+                </svg>
+            </div>
+            <div class="container mx-auto relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+                    <div class="px-4">
+                        <h4 class="text-xl md:text-2xl font-serif font-black text-rose-500 mb-4 italic">Hamara Kal</h4>
+                        <p class="text-gray-400 italic text-sm md:text-base">"Humne 19 Nov 2024 ko ek haseen khwab dekha tha. Ye safar ab kabhi khatam nahi hoga."</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="w-16 h-16 md:w-20 md:h-20 bg-rose-500 rounded-full flex items-center justify-center shadow-xl mb-6">
+                            <i data-lucide="heart" class="text-white fill-white w-8 h-8"></i>
+                        </div>
+                        <div class="flex gap-4 md:gap-6">
+                            <div class="p-3 border rounded-xl text-rose-500 hover:bg-rose-50 transition-all cursor-pointer">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </div>
+                            <div class="p-3 border rounded-xl text-rose-500 hover:bg-rose-50 transition-all cursor-pointer">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:text-right px-4">
+                        <h4 class="text-base md:text-lg font-serif font-bold text-gray-800 mb-4 tracking-tight">Khaas Tareekhein</h4>
+                        <ul class="text-xs md:text-sm text-gray-500 italic space-y-2">
+                            <li>Since 19 Nov 2024</li>
+                            <li>Pehli Mulakat: 18 Dec</li>
+                            <li>Dusri Mulakat: 20 Dec</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-12 md:mt-16 text-center border-t pt-8 border-rose-50">
+                    <p class="text-[7px] md:text-[9px] uppercase tracking-[0.4em] md:tracking-[0.5em] text-gray-300 font-black mb-2">CRAFTED WITH ETERNAL LOVE</p>
+                    <p class="text-[10px] md:text-xs text-rose-300 font-serif">© 2024 - Sirf Tumhare Liye.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const allowedPasswords = ["Rahul9973", "rahul9973", "rubi7782", "Rubi7782"];
+        const correctSecretPassword = "2009";
+
+        const specialMemories = [
+            {
+                id: 1, date: "18 December 2024", time: "05:52 PM", title: "Pehli Mulakat", icon: "snowflake", color: "text-blue-400",
+                shayari: "Woh thand ki shaam aur tumhara saath, \nYaad hai mujhe woh pehli mulakat. \nWaqt thama tha us 5:52 ke mod par, \nJab pehli baar hui thi dil se dil ki baat."
+            },
+            {
+                id: 2, date: "20 December 2024", time: "11:50 AM", title: "Dusri Mulakat", icon: "sun", color: "text-yellow-500",
+                shayari: "Subah ki dhoop aur tumhara chehra, \nYaadon par hai sirf tumhara pehra. \n11:50 ka woh lamha bada pyaara tha, \nJab dosti ka rang hone laga thoda gehra."
+            }
+        ];
+
+        const compliments = [
+            { id: 1, title: "Tumhari Muskurahat", text: "Tumhari smile poori duniya ko roshan kar sakti hai. Jab tum hasti ho, waqt tham sa jata hai." },
+            { id: 2, title: "Tumhari Aankhein", text: "Inme ek sukoon hai, jaise gehra samundar. Har baar dekhta hoon toh kho jata hoon." },
+            { id: 3, title: "Tumhara Dil", text: "Itna saaf aur itna pyaara dil aaj ke zamane mein milna mushkil hai. I am so lucky." },
+            { id: 4, title: "Tumhara Saath", text: "Tumhare saath hone se har mushkil aasaan lagti hai. Tum meri sabse badi taqat ho." }
+        ];
+
+        // --- CORE FUNCTIONS ---
+
+        // Floating Hearts Logic
+        function createHeart(container, isRandom = true) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = `<i data-lucide="heart" class="text-rose-300 fill-rose-200" style="width:${Math.random() * 20 + 10}px; height:auto;"></i>`;
+            
+            const left = Math.random() * 100;
+            const top = isRandom ? Math.random() * 100 : 110;
+            const duration = 15 + Math.random() * 15;
+            const delay = Math.random() * 10;
+
+            heart.style.left = `${left}%`;
+            heart.style.top = `${top}%`;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.animationDelay = `-${delay}s`;
+            
+            container.appendChild(heart);
+            lucide.createIcons();
+        }
+
+        // Timer Logic
+        function updateTimer() {
+            const startDate = new Date('2024-11-19T00:00:00');
+            const now = new Date();
+            const diff = now - startDate;
+
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerTex
